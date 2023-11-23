@@ -1,0 +1,26 @@
+version: '3.1'
+services :
+  db:
+    image: postgres:10-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user1
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: tododb
+  admin:
+    image: adminer
+    restart: always
+    depends_on: 
+      - db
+    ports:
+      - 8080:8080
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: angeljach@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Jach-T3st
+    ports:
+      - "5050:80"
